@@ -55,7 +55,7 @@ public class AStarPathfinder : IPathfinder
         openSet.Add(start);
         gCost[start] = 0;
         start.hCost = CalculateHCost(start, goal);
-        fCost[start] = start.hCost;
+        fCost[start] = (int)start.hCost;
         
         NodeComparer comparer = new NodeComparer(fCost);
         
