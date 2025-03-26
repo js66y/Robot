@@ -20,7 +20,14 @@ public class GridManager : MonoBehaviour
     public GridCell[,] grid; // 二维网格数组
     private int gridSizeX, gridSizeZ; // 网格的X和Z维度大小
     private Transform gridParent; // 网格的父物体
-    
+    public bool isWalkable => walkable;    
+    public GameObject occupiedBy => occupyingObject;    
+    public int x => gridX;    
+    public int y => gridZ;
+    public bool IsAccessibleFor(GameObject agent)
+    {
+        return walkable && (occupyingObject == null || occupyingObject == agent);
+    }
     private Dictionary<GameObject, GridCell> objectToCellMap = new Dictionary<GameObject, GridCell>(); // 对象到网格的映射
 
     private void Awake()
