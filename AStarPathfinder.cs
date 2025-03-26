@@ -95,7 +95,9 @@ public class AStarPathfinder : IPathfinder
                     cameFrom[neighbor] = current;
                     gCost[neighbor] = tentativeGCost;
                     neighbor.hCost = CalculateHCost(neighbor, goal);
-                    fCost[neighbor] = gCost[neighbor] + neighbor.hCost;
+                    // fCost[neighbor] = gCost[neighbor] + neighbor.hCost;
+                    
+                    fCost[neighbor] = (int)(gCost[neighbor] + neighbor.hCost);
                     
                     // 如果是新节点，添加到开放列表
                     if (!openSet.Contains(neighbor))
@@ -111,9 +113,9 @@ public class AStarPathfinder : IPathfinder
     }
     
     private int CalculateHCost(GridCell a, GridCell b)
-    {
-        // 使用曼哈顿距离作为启发式函数
-        return MOVE_STRAIGHT_COST * (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y));
+    {    
+    // Convert float to int using explicit cast    
+    return (int)(MOVE_STRAIGHT_COST * (Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y)));
     }
     
     private List<GridCell> GetNeighbors(GridCell cell)
